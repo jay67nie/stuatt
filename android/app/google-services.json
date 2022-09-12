@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "482166655146",
+    "project_id": "stuatt-sa77muk",
+    "storage_bucket": "stuatt-sa77muk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482166655146:android:8b8400306a7e279d2ee8d3",
+        "android_client_info": {
+          "package_name": "com.example.codehive.stuatt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482166655146-002vset71v5r03bgma9ki85fs2b04lne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX2GTPcL0IJeqhjytsDPFK1X4SOQVnwv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482166655146-002vset71v5r03bgma9ki85fs2b04lne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
