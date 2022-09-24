@@ -6,12 +6,11 @@ import 'loginpage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-    
-    runApp(MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +18,4 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
     );
   }
-} 
-
-
-
+}
