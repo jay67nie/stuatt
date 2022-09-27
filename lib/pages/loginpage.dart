@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../pages/auth_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final VoidCallback showRegisterpage;
+  const LoginPage({Key? key, required this.showRegisterpage}) : super(key: key);
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -15,6 +17,12 @@ Future SignIn() async {
     email: _emailController.text.trim(),
     password: _passwordController.text.trim(),
   );
+}
+
+@override
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -76,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _passwordController,
-                      obscureText: true,
+                      obscureText: false,
                       decoration: InputDecoration(
                           border: InputBorder.none, hintText: 'Password'),
                     ),
@@ -87,8 +95,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GestureDetector(
-                onTap: SignIn,
+              child: TextButton(
+                onPressed: SignIn,
                 child: Container(
                   padding: const EdgeInsets.all(13.0),
                   decoration: BoxDecoration(
@@ -115,10 +123,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Don\'t have an account?'),
-                Text(
-                  ' Register Here',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: widget.showRegisterpage,
+                  child: Text(
+                    ' Register Here',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             )
