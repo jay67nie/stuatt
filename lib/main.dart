@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:stuatt/firebase_options.dart';
 import 'package:stuatt/authentication/next_page.dart';
 
-import 'pages/loginpage.dart';
+import 'authentication/loginpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
