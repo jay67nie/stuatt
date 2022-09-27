@@ -10,6 +10,7 @@ class Login{
   Future<String?> login() async {
 
     var myAuth = FirebaseAuth.instance;
+    myAuth.setPersistence(Persistence.SESSION);
     try {
       await myAuth.signInWithEmailAndPassword(email: email, password: password);
       print("Success");

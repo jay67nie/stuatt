@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stuatt/QRGeneration/before%20page.dart';
+import 'package:stuatt/QRScan/ScanQR.dart';
 import 'package:stuatt/authentication/login.dart';
 import 'package:stuatt/authentication/sign_up.dart';
 import 'package:stuatt/class/teaching.dart';
@@ -19,12 +21,12 @@ class LoginPage extends StatefulWidget {
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
 
-Future SignIn() async {
-  await FirebaseAuth.instance.signInWithEmailAndPassword(
-    email: _emailController.text.trim(),
-    password: _passwordController.text.trim(),
-  );
-}
+// Future SignIn() async {
+//   await FirebaseAuth.instance.signInWithEmailAndPassword(
+//     email: _emailController.text.trim(),
+//     password: _passwordController.text.trim(),
+//   );
+// }
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -97,9 +99,36 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: ElevatedButton(
-                onPressed: (){
+                onPressed: () async {
                   print("HH");
-                  //Login(email: 'jeromessenyonjo@outlook.com', password: 'One+2=3!').login();
+                  await Login(email: _emailController.text.trim(), password: _passwordController.text.trim()).login().then((value){
+
+                    //Future<String?> good = "Success" as Future<String?>;  //Watch this area.
+
+                    if(value == "Success"){
+                      print("Done");
+                      Navigator.pushReplacement(context,  MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            if(_emailController.text.trim().contains("outlook")){
+
+                              return const generatepage();
+                            }
+                            else{
+                              return const ScanQR();
+                            }
+
+                          }),);
+                    }
+                    else {
+                       var snackBar = SnackBar(
+                          content: Text(value!),);
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      print("Nope");
+                    }
+
+                  });
+
                  // LectureNo(courseUnit: 'CSC1202').getLecNo();
                   //Create(courseCode: 'CSC1204', lecNo: '1');
                   //Teaching().getCourses();
