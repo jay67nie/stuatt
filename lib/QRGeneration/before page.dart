@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stuatt/generate.dart';
+import 'package:stuatt/QRGeneration/generate.dart';
+
 
 void main(){
   runApp(const generatepage());

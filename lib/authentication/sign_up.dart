@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stuatt/user-info/register.dart';
 
 class SignUp {
   SignUp({required this.email, required this.password});
@@ -8,12 +9,16 @@ class SignUp {
 
   Future<String?> signUp() async {
     var myAuth = FirebaseAuth.instance;
+
+
     try {
-      await myAuth
+       myAuth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => myAuth.signInWithEmailAndPassword(
               email: email, password: password))
-          .then((value) => myAuth.currentUser!.sendEmailVerification());
+          .then((value) {myAuth.currentUser!.sendEmailVerification();Register(firstName: 'Jerome', lastName: 'Ssenyonjo', third: '210070', type: 'S').registerDetails();
+          });
+      print("HH");
       return 'Success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
