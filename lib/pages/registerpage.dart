@@ -98,24 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: TextButton(
+                child: ElevatedButton(
                   onPressed: SignUp,
-                  child: Container(
-                    padding: const EdgeInsets.all(13.0),
-                    decoration: BoxDecoration(
-                      color: Colors.purple,
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0),
-                      ),
-                    ),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0),
                   ),
                 )),
             SizedBox(
