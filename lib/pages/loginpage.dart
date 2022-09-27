@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../pages/auth_page.dart';
 
+import 'package:stuatt/QRGeneration/before%20page.dart';
+import 'package:stuatt/QRScan/ScanQR.dart';
 import 'package:stuatt/authentication/login.dart';
 import 'package:stuatt/authentication/sign_up.dart';
 import 'package:stuatt/class/teaching.dart';
@@ -13,8 +15,10 @@ import 'package:stuatt/class/lectureNumber.dart';
 import 'package:stuatt/class/create.dart';
 
 class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterpage;
-  const LoginPage({Key? key, required this.showRegisterpage}) : super(key: key);
+  final VoidCallback showRegisterPage;
+  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
+  
+  
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -22,12 +26,12 @@ class LoginPage extends StatefulWidget {
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
 
-Future SignIn() async {
-  await FirebaseAuth.instance.signInWithEmailAndPassword(
-    email: _emailController.text.trim(),
-    password: _passwordController.text.trim(),
-  );
-}
+// Future SignIn() async {
+//   await FirebaseAuth.instance.signInWithEmailAndPassword(
+//     email: _emailController.text.trim(),
+//     password: _passwordController.text.trim(),
+//   );
+// }
 
 @override
 void dispose() {
@@ -104,16 +108,43 @@ class _LoginPageState extends State<LoginPage> {
               height: 12,
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print("HH");
-                    //Login(email: 'jeromessenyonjo@outlook.com', password: 'One+2=3!').login();
-                    // LectureNo(courseUnit: 'CSC1202').getLecNo();
-                    //Create(courseCode: 'CSC1204', lecNo: '1');
-                    //Teaching().getCourses();
-                    //Attendance(course: 'CSC', lecNo: '3', cUnit: 'CSC1202').getLecNo();
-                    //Submit(course: 'CSC', courseUnit: "CSC1202", lecNo: "4").submit();
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: ElevatedButton(
+                onPressed: () async {
+                  print("HH");
+                  await Login(email: _emailController.text.trim(), password: _passwordController.text.trim()).login().then((value){
+
+                    //Future<String?> good = "Success" as Future<String?>;  //Watch this area.
+
+                    if(value == "Success"){
+                      print("Done");
+                      Navigator.pushReplacement(context,  MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            if(_emailController.text.trim().contains("outlook")){
+
+                              return const generatepage();
+                            }
+                            else{
+                              return const ScanQR();
+                            }
+
+                          }),);
+                    }
+                    else {
+                       var snackBar = SnackBar(
+                          content: Text(value!),);
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      print("Nope");
+                    }
+
+                  });
+
+                 // LectureNo(courseUnit: 'CSC1202').getLecNo();
+                  //Create(courseCode: 'CSC1204', lecNo: '1');
+                  //Teaching().getCourses();
+                  //Attendance(course: 'CSC', lecNo: '3', cUnit: 'CSC1202').getLecNo();
+                  //Submit(course: 'CSC', courseUnit: "CSC1202", lecNo: "4").submit();
 
                     //SignUp(email: 'jeromessenyonjo@outlook.com', password: 'One+2=3!').signUp();
                   },
@@ -148,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text('Don\'t have an account?'),
                 GestureDetector(
-                  onTap: widget.showRegisterpage,
+                  onTap: widget.showRegisterPage,
                   child: Text(
                     ' Register Here',
                     style: TextStyle(
