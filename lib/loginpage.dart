@@ -1,5 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stuatt/authentication/login.dart';
+import 'package:stuatt/authentication/sign_up.dart';
+import 'package:stuatt/class/teaching.dart';
+import 'package:stuatt/user-info/register.dart';
+import 'package:stuatt/user-info/submit.dart';
+import 'package:stuatt/class/attendance.dart';
+import 'package:stuatt/class/lectureNumber.dart';
+import 'package:stuatt/class/create.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -33,17 +42,17 @@ class _LoginPageState extends State<LoginPage> {
                 width: 150,
               ),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
-            Text(
+            const Text(
               'STUATT',
               style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             Padding(
@@ -54,15 +63,15 @@ class _LoginPageState extends State<LoginPage> {
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: 'Email'),
                     ),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Padding(
@@ -73,47 +82,61 @@ class _LoginPageState extends State<LoginPage> {
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: 'Password'),
                     ),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GestureDetector(
-                onTap: SignIn,
-                child: Container(
-                  padding: const EdgeInsets.all(13.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
+              child: ElevatedButton(
+                onPressed: (){
+                  print("HH");
+                  //Login(email: 'jeromessenyonjo@outlook.com', password: 'One+2=3!').login();
+                 // LectureNo(courseUnit: 'CSC1202').getLecNo();
+                  //Create(courseCode: 'CSC1204', lecNo: '1');
+                  //Teaching().getCourses();
+                  //Attendance(course: 'CSC', lecNo: '3', cUnit: 'CSC1202').getLecNo();
+                  //Submit(course: 'CSC', courseUnit: "CSC1202", lecNo: "4").submit();
+
+                  //SignUp(email: 'jeromessenyonjo@outlook.com', password: 'One+2=3!').signUp();
+                  },
+                child: const Text("Sign in"),
+              )
+              // child: GestureDetector(
+              //   onTap: (){},  //SignIn
+              //   child: Container(
+              //     padding: const EdgeInsets.all(13.0),
+              //     decoration: BoxDecoration(
+              //       color: Colors.green,
+              //       border: Border.all(color: Colors.black),
+              //       borderRadius: BorderRadius.circular(10.0),
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         'Sign In',
+              //         style: TextStyle(
+              //             color: Colors.black,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 15.0),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text('Don\'t have an account?'),
                 Text(
                   ' Register Here',

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register{
   
@@ -7,17 +8,18 @@ class Register{
   String firstName, lastName, third, type;
 
   Future<String?> registerDetails() async{
+
+    var user = FirebaseAuth.instance.currentUser!;
     
     var names = <String, String>{
-      "Fname": firstName,
-      "Lname": lastName,
+      "Name": "$firstName $lastName",
+      if(type == 'S') "StdNo": third,
 
-      if(type == "S") "StdNo": third,
-      if(type == "L") "CCode": third+DateTime.now().year.toString(),
     };
+    //third is stdNO
 
     try{
-      FirebaseFirestore.instance.collection(type).doc(third).set(names);
+      FirebaseFirestore.instance.collection(type).doc(user.uid).set(names);
       return "Success";
 
     }

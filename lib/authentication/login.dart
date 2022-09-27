@@ -12,6 +12,7 @@ class Login{
     var myAuth = FirebaseAuth.instance;
     try {
       await myAuth.signInWithEmailAndPassword(email: email, password: password);
+      print("Success");
       return 'Success';
     }
     on FirebaseAuthException catch (e) {
