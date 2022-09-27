@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 15.0,
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 350.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 12.0,
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 350.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 12,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 450.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: GestureDetector(
                 onTap: SignIn,
                 child: Container(
