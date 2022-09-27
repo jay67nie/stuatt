@@ -37,7 +37,7 @@ class myHome extends StatelessWidget{
                       Center(child: ElevatedButton (
                         onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => StuAtt().myQR()));},
                         child: const Text("Generate QR Code",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)),
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                       ),
                       ),
                     ]
