@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stuatt/before%20page.dart';
 
 void main(){
   runApp(formpage());
@@ -58,21 +59,21 @@ class aformState extends State<aform>{
             ),
           ),
           Column(mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Center(
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Center(child: ElevatedButton (
-    onPressed: () {},
-    child: const Text("Submit",
-    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
-    ),
-    ),
-    ],
-    )
-    ),
-    ]),
-  ]));
+              children: [
+                Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(child: ElevatedButton (
+                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) => generatepage()));},
+                          child: const Text("Submit",
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                        ),
+                        ),
+                      ],
+                    )
+                ),
+              ]),
+        ]));
   }
 }
