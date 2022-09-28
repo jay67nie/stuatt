@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stuatt/QRGeneration/generate.dart';
 
 
-class generatepage extends StatelessWidget {
-  const generatepage({super.key});
+class GeneratePage extends StatelessWidget {
+  const GeneratePage({super.key});
 
   @override
   Widget build(BuildContext context) {

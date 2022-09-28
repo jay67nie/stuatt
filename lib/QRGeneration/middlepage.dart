@@ -65,7 +65,7 @@ class aformState extends State<aform>{
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(child: ElevatedButton (
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) => generatepage()));},
+                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) => const GeneratePage()));},
                           child: const Text("Submit",
                               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                         ),

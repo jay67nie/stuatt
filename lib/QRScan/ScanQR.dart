@@ -18,9 +18,10 @@ class _ScanQRState extends State<ScanQR> {
 
   @override
   Widget build(BuildContext context) {
-    final ScanResult = this.scanResult;
+    final scanResult = this.scanResult;
 
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
@@ -34,7 +35,7 @@ class _ScanQRState extends State<ScanQR> {
                 onPressed: _scan,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const [
                     Icon(Icons.camera, size: 24.0),
                     Text('Click Me!'),
                     SizedBox(

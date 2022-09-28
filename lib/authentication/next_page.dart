@@ -24,7 +24,7 @@ class _NextPageState extends State<NextPage> {
     }
     else{
       if(user.email!.contains("outlook")){
-        return const generatepage();
+        return const GeneratePage();
 
       }
 

@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                             print("Finally");
                             if(_emailController.text.trim().contains("outlook")){
 
-                              return const generatepage();
+                              return const GeneratePage();
                             }
                             else{
                               return const ScanQR();

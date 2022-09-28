@@ -1,33 +1,35 @@
 import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:stuatt/QRGeneration/before_page.dart';
+import 'package:stuatt/user-info/register.dart';
 
-class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({Key? key}) : super(key: key);
+class RegisterLecturer extends StatefulWidget {
+  const RegisterLecturer({Key? key}) : super(key: key);
 
   @override
-  _RegisterWidgetState createState() => _RegisterWidgetState();
+  State<RegisterLecturer> createState() => _RegisterLecturerState();
 }
 
-class _RegisterWidgetState extends State<RegisterWidget> {
-  TextEditingController? textController1;
-  TextEditingController? textController2;
-  TextEditingController? textController3;
+class _RegisterLecturerState extends State<RegisterLecturer> {
+  TextEditingController? firstNameController;
+  TextEditingController? lastNameController;
+  TextEditingController? courseCodeController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    courseCodeController = TextEditingController();
   }
 
   @override
   void dispose() {
-    textController1?.dispose();
-    textController2?.dispose();
-    textController3?.dispose();
+    firstNameController?.dispose();
+    lastNameController?.dispose();
+    courseCodeController?.dispose();
     super.dispose();
   }
 
@@ -43,7 +45,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(90, 50, 90, 8),
+                padding: const EdgeInsetsDirectional.fromSTEB(90, 50, 90, 8),
                 child: Image.network(
                   'https://picsum.photos/seed/368/600',
                   width: 100,
@@ -51,7 +53,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   fit: BoxFit.cover,
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child: Text(
                   'STUATT',
@@ -65,13 +67,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(50, 50, 50, 50),
+                    padding: const EdgeInsetsDirectional.fromSTEB(50, 50, 50, 50),
                     child: Container(
                       width: 100,
                       height: 400,
                       decoration: BoxDecoration(
                         color: Colors.green,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
                             color: Color(0x4D000000),
@@ -81,21 +83,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
+                        padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     15, 15, 15, 15),
-                                child: Container(
+                                child: SizedBox(
                                   width: double.infinity,
                                   child: Form(
                                     key: formKey,
                                     autovalidateMode: AutovalidateMode.disabled,
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           15, 15, 15, 15),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -104,13 +106,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0, 8, 0, 8),
                                             child: TextFormField(
-                                              controller: textController1,
+                                              controller: firstNameController,
                                               autofocus: true,
                                               obscureText: false,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: 'First Name',
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey),
@@ -121,7 +123,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -135,7 +137,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -149,7 +151,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -163,7 +165,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -171,19 +173,19 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              style: TextStyle(fontSize: 20),
+                                              style: const TextStyle(fontSize: 20),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0, 8, 0, 8),
                                             child: TextFormField(
-                                              controller: textController2,
+                                              controller: lastNameController,
                                               autofocus: true,
                                               obscureText: false,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: 'Last Name',
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey),
@@ -194,7 +196,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -208,7 +210,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -222,7 +224,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -236,7 +238,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -245,19 +247,19 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 ),
                                               ),
                                               style:
-                                                  TextStyle(color: Colors.grey),
+                                                  const TextStyle(color: Colors.grey),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0, 8, 0, 8),
                                             child: TextFormField(
-                                              controller: textController3,
+                                              controller: courseCodeController,
                                               autofocus: true,
                                               obscureText: false,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: 'Course Code',
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey),
@@ -268,7 +270,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -282,7 +284,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -296,7 +298,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -310,7 +312,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                     width: 1,
                                                   ),
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     topLeft:
                                                         Radius.circular(4.0),
                                                     topRight:
@@ -319,15 +321,30 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                 ),
                                               ),
                                               style:
-                                                  TextStyle(color: Colors.grey),
+                                                  const TextStyle(color: Colors.grey),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
                                           ElevatedButton(
                                             onPressed: () {
                                               print('Button pressed ...');
+                                              Register(firstName: firstNameController!.text.trim() ,
+                                                  lastName: lastNameController!.text.trim(),
+                                              type: "L",
+                                              ).registerDetails().then((value) {
+                                                if (value == "Success"){
+                                                  Navigator.pushReplacement(context, MaterialPageRoute(
+                                                      builder: (BuildContext context) => const GeneratePage()));
+
+
+                                                }
+
+
+                                              }
+
+                                              );
                                             },
-                                            child: Text('Register'),
+                                            child: const Text('Register'),
                                           ),
                                         ],
                                       ),
