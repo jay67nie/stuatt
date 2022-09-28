@@ -16,7 +16,7 @@ class SignUp {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => myAuth.signInWithEmailAndPassword(
               email: email, password: password))
-          .then((value) {myAuth.currentUser!.sendEmailVerification();Register(firstName: 'Jerome', lastName: 'Ssenyonjo', third: '210070', type: 'S').registerDetails();
+          .then((value) {myAuth.currentUser!.sendEmailVerification();
           });
       print("HH");
       return 'Success';

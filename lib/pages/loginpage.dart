@@ -42,6 +42,7 @@ void dispose() {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    print(context.hashCode);
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       body: SafeArea(
@@ -99,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextField(
                       controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: 'Password'),
                     ),
                   ),
@@ -120,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       print("Done");
                       Navigator.pushReplacement(context,  MaterialPageRoute<void>(
                           builder: (BuildContext context) {
+                            print("Finally");
                             if(_emailController.text.trim().contains("outlook")){
 
                               return const generatepage();
@@ -177,10 +179,10 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account?'),
+                const Text('Don\'t have an account?'),
                 GestureDetector(
                   onTap: widget.showRegisterPage,
-                  child: Text(
+                  child: const Text(
                     ' Register Here',
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),

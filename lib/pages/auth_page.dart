@@ -18,8 +18,15 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    return Scaffold(
+
+      body: showLoginPage? LoginPage(showRegisterPage: toggleScreens)
+      : RegisterPage(showLoginPage: toggleScreens)
+
+    );
     if (showLoginPage) {
-      return LoginPage(showRegisterpage: toggleScreens);
+      return LoginPage(showRegisterPage: toggleScreens);
     } else {
       return RegisterPage(showLoginPage: toggleScreens);
     }

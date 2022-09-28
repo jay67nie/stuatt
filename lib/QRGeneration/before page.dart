@@ -2,25 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stuatt/QRGeneration/generate.dart';
 
 
-void main(){
-  runApp(const generatepage());
-}
-
 class generatepage extends StatelessWidget {
   const generatepage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-        title: 'STuAtt',
-        home: myHome(),
-    );
-  }
-}
-
-class myHome extends StatelessWidget{
-  const myHome({super.key});
 
   @override
   Widget build(BuildContext context) {
