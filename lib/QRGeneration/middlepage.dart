@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stuatt/before%20page.dart';
+import 'package:stuatt/QRGeneration/before_page.dart';
 
 void main(){
   runApp(formpage());

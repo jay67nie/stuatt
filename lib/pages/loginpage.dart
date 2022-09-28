@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stuatt/QRGeneration/before_page.dart';
 
 import '../pages/auth_page.dart';
-
-import 'package:stuatt/QRGeneration/before%20page.dart';
 import 'package:stuatt/QRScan/ScanQR.dart';
 import 'package:stuatt/authentication/login.dart';
 import 'package:stuatt/authentication/sign_up.dart';
