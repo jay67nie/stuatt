@@ -3,23 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Register{
   
-  Register({required this.firstName, required this.lastName, required this.third, required this.type});
+  Register({required this.firstName, required this.lastName, required this.type, this.third});
   
-  String firstName, lastName, third, type;
+  String firstName, lastName, type;
+  String? third;
 
   Future<String?> registerDetails() async{
 
     var user = FirebaseAuth.instance.currentUser!;
-    
-    var names = <String, String>{
-      "Name": "$firstName $lastName",
-      if(type == 'S') "StdNo": third,
-
-    };
-    //third is stdNO
 
     try{
-      FirebaseFirestore.instance.collection(type).doc(user.uid).set(names);
+      user.updateDisplayName("$firstName $lastName");
+
+      if(type == 'S') FirebaseFirestore.instance.collection(type).doc(user.uid).set({"StdNo": third!});
+
       return "Success";
 
     }

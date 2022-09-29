@@ -12,12 +12,7 @@ class SignUp {
 
 
     try {
-       myAuth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => myAuth.signInWithEmailAndPassword(
-              email: email, password: password))
-          .then((value) {myAuth.currentUser!.sendEmailVerification();Register(firstName: 'Jerome', lastName: 'Ssenyonjo', third: '210070', type: 'S').registerDetails();
-          });
+       myAuth.createUserWithEmailAndPassword(email: email, password: password);
       print("HH");
       return 'Success';
     } on FirebaseAuthException catch (e) {
