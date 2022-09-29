@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class StuAtt {
+  String courseCode;
+
+  String courseUnit;
+
+  String lecNo;
+
+  StuAtt({required this.courseCode, required this.courseUnit, required this.lecNo});
   Scaffold myQR() {
+    courseCode+=DateTime.now().year.toString();
     return Scaffold(
           appBar: AppBar(
               title: const Text('StuAtt')
@@ -17,7 +25,7 @@ class StuAtt {
                           children: [
                             Center(
                               child: QrImage(
-                                  data: 'CSC2022 CSC1202 1',
+                                  data: "$courseCode $courseUnit $lecNo",
                                   version: QrVersions.auto,
                                   size: (200),
                                   gapless: false,
