@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stuatt/authentication/message.dart';
+
+import '../authentication/sign_up.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -11,18 +14,18 @@ class RegisterPage extends StatefulWidget {
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
 
-Future SignUp() async {
-  await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: _emailController.text.trim(),
-    password: _passwordController.text.trim(),
-  );
-}
+//Future SignUp() async {
+ // await FirebaseAuth.instance.createUserWithEmailAndPassword(
+   // email: _emailController.text.trim(),
+  //  password: _passwordController.text.trim(),
+//  );
+//}
 
-@override
-void dispose() {
-  _emailController.dispose();
-  _passwordController.dispose();
-}
+//@override
+//void dispose() {
+ // _emailController.dispose();
+ // _passwordController.dispose();
+//}
 
 class _RegisterPageState extends State<RegisterPage> {
   @override
@@ -99,7 +102,23 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: ElevatedButton(
-                  onPressed: SignUp,
+                  onPressed:() async {
+                    SignUp(
+                    email: _emailController.text.trim(), 
+                    password: _passwordController.text.trim(),)
+                    .signUp().then((value) {
+                      if (value == 'Success'){
+                        Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                          builder: (BuildContext  context){
+                            return VerificationMessageWidget();
+                          }
+                        ),    
+                          
+                        );}
+
+
+                      });
+                 },
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
