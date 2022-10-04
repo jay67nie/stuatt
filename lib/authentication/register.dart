@@ -36,28 +36,31 @@ class _RegisterStudentState extends State<RegisterStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
+          child: SingleChildScrollView(
+
+            child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(90, 50, 90, 8),
-                child: Image.network(
-                  'https://picsum.photos/seed/368/600',
+                child: Image.asset(
+                  "assets/StuAtt.jpeg",
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child: Text(
                   'STUATT',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
+                  style: Theme.of(context).textTheme.headline1,
+
                 ),
               ),
               ListView(
@@ -71,7 +74,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                       width: 100,
                       height: 400,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.lightBlueAccent,
                         boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
@@ -246,7 +249,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                                                 ),
                                               ),
                                               style:
-                                                  const TextStyle(color: Colors.grey),
+                                                  const TextStyle(fontSize: 20),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -320,7 +323,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                                                 ),
                                               ),
                                               style:
-                                                  const TextStyle(color: Colors.grey),
+                                                  const TextStyle(fontSize: 20),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -333,6 +336,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                                                 third: stdNoController!.text.trim()
                                               ).registerDetails().then((value) {
                                                 if (value == "Success"){
+                                                  print("Success");
                                                   Navigator.pushReplacement(context, MaterialPageRoute(
                                                       builder: (BuildContext context) => const ScanQR()));
 
@@ -362,7 +366,8 @@ class _RegisterStudentState extends State<RegisterStudent> {
                 ],
               ),
             ],
-          ),
+          )
+      ),
         ),
       ),
     );

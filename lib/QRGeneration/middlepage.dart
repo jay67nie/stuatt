@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stuatt/QRGeneration/generate.dart';
+import 'package:stuatt/class/attendance.dart';
 
 
 
@@ -80,10 +81,13 @@ class _LecturerForm extends State<MyForm>{
                           child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ElevatedButton (
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) => StuAtt(
-                            courseCode: courseCodeController!.text.trim(),
-                            courseUnit: courseUnitController!.text.trim(),
-                            lecNo: lecNoController!.text.trim()).myQR()
+                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) {
+                            Attendance.getCourse(courseCodeController!.text.trim.toString(), lecNoController!.text.trim().toString());
+                            StuAtt.myQRData(courseCodeController!.text.trim().toString(),
+                                courseUnitController!.text.trim().toString(),
+                                lecNoController!.text.trim().toString());
+                            return StuAtt().myQR();
+    }
 
 
                           ));},

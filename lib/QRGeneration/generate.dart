@@ -1,52 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:stuatt/QRScan/ScanQR.dart';
+import 'package:stuatt/class/classes.dart';
+import 'QR.dart';
 
 class StuAtt {
-  String courseCode;
 
-  String courseUnit;
+ static String? courseCode;
 
-  String lecNo;
+  static String? courseUnit;
 
-  StuAtt({required this.courseCode, required this.courseUnit, required this.lecNo});
-  Scaffold myQR() {
-    courseCode+=DateTime.now().year.toString();
-    return Scaffold(
-          appBar: AppBar(
-              title: const Text('StuAtt')
-          ),
-          body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: QrImage(
-                                  data: "$courseCode $courseUnit $lecNo",
-                                  version: QrVersions.auto,
-                                  size: (200),
-                                  gapless: false,
-                                  errorStateBuilder: (cxt, err) {
-                                    return Container(
-                                      child: const Center(
-                                        child: Text(
-                                          'Something Went Wrong',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                              ),
-                            )
-                          ]
-                      )
-                  ),
-                ]
-            ),
-          ),
-        );
+  static String? lecNo;
+
+  static String? code;
+
+  static String? myQRData(String cC, String cU, String lN) {
+    courseCode = cC+DateTime.now().year.toString();
+    courseUnit = cU;
+    lecNo = lN;
+    code = "$courseCode $courseUnit $lecNo";
+    return code;
+  }
+
+  Widget myQR(){
+    return const QR();
+
   }
 }

@@ -18,15 +18,11 @@ class VerificationMessageWidget extends StatefulWidget {
 
 class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  late User user;
   late Timer timer;
 
   @override
   void initState() {
-    user = FirebaseAuth.instance.currentUser!;
-    user.sendEmailVerification();
-    
+    User user = FirebaseAuth.instance.currentUser!;
     timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       user.reload();
       if (user.emailVerified){ timer.cancel();
@@ -107,7 +103,7 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
-                                  height: 5,
+                                  height: 2,
                                 ),
                               ),
                             ),

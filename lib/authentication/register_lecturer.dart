@@ -1,4 +1,4 @@
-import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:stuatt/QRGeneration/before_page.dart';
 import 'package:stuatt/user-info/register.dart';
@@ -37,8 +37,9 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
+        child: SingleChildScrollView(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
@@ -46,8 +47,8 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(90, 50, 90, 8),
-                child: Image.network(
-                  'https://picsum.photos/seed/368/600',
+                child: Image.asset(
+                  'assets/StuAtt.jpeg',
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
@@ -72,7 +73,7 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
                       width: 100,
                       height: 400,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.lightBlueAccent,
                         boxShadow: const [
                           BoxShadow(
                             blurRadius: 5,
@@ -247,7 +248,7 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
                                                 ),
                                               ),
                                               style:
-                                                  const TextStyle(color: Colors.grey),
+                                                  const TextStyle(fontSize: 20),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -321,7 +322,7 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
                                                 ),
                                               ),
                                               style:
-                                                  const TextStyle(color: Colors.grey),
+                                                  const TextStyle(fontSize: 20),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -363,6 +364,7 @@ class _RegisterLecturerState extends State<RegisterLecturer> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

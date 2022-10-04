@@ -24,11 +24,15 @@ class _NextPageState extends State<NextPage> {
     }
     else{
       if(user.email!.contains("outlook")){
+        FirebaseAuth.instance.signOut();
+        setState((){});
         return const GeneratePage();
 
       }
 
       else{
+        FirebaseAuth.instance.signOut();
+        setState((){});
         return const ScanQR();
       }
 

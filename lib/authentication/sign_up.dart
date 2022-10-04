@@ -9,11 +9,31 @@ class SignUp {
 
   Future<String?> signUp() async {
     var myAuth = FirebaseAuth.instance;
+    var user = myAuth.currentUser;
+
 
 
     try {
-       myAuth.createUserWithEmailAndPassword(email: email, password: password);
-      print("HH");
+      await myAuth.createUserWithEmailAndPassword(email: email, password: password);
+       if(myAuth.currentUser == null){
+         await myAuth.signInWithEmailAndPassword(email: email, password: password).then((value) =>
+             myAuth.currentUser?.sendEmailVerification().then((value) {
+
+               print("Email sent");
+             }));
+             }
+
+       else{
+         myAuth.currentUser?.sendEmailVerification().then((value) {
+
+           print("Email sent");
+         });
+
+       }
+
+       //myAuth.currentUser?.sendEmailVerification();
+
+       print("HH");
       return 'Success';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

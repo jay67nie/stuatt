@@ -10,13 +10,13 @@ class Register{
 
   Future<String?> registerDetails() async{
 
-    var user = FirebaseAuth.instance.currentUser!;
+    var user = FirebaseAuth.instance.currentUser;
 
     try{
-      user.updateDisplayName("$firstName $lastName");
+      user!.updateDisplayName("$firstName $lastName");
 
       if(type == 'S') FirebaseFirestore.instance.collection(type).doc(user.uid).set({"StdNo": third!});
-
+      print("Success");
       return "Success";
 
     }

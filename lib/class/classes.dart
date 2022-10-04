@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stuatt/class/attendance.dart';
+import 'package:stuatt/class/lectureNumber.dart';
+import 'package:stuatt/class/teaching.dart';
 
 class ClassesWidget extends StatefulWidget {
   const ClassesWidget({Key? key}) : super(key: key);
@@ -8,28 +11,45 @@ class ClassesWidget extends StatefulWidget {
 }
 
 class _ClassesWidgetState extends State<ClassesWidget> {
-  List<String> myList = <String>['A', 'B', 'C'];
+  bool lecturePage = false;
+  bool got = false;
+  int toGet = 1;
+  late int clickIndex = 0;
+  late List<dynamic> courses = <dynamic>[];
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+   getList(int x) async {
+    if(x ==1) {
+      var tempList = await Teaching().getCourses();
+      courses = tempList;
+      got = true;
+      setState((){
+      });
+
+    }
+    if(x ==2) {
+      var tempList = await LectureNo(courseUnit: courses[clickIndex]).getLecNo();
+      courses = tempList;
+      got =true;
+      setState((){
+      });
+
+    }
+    if(x ==3) {
+      var tempList = await Attendance(cUnit: courses[clickIndex]).getLecNo();
+      courses = tempList;
+      got = true;
+      setState((){
+      });
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if(!got) getList(toGet);
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Classes',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            color: Colors.white,
-            fontSize: 22,
-          ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2,
-      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
@@ -41,21 +61,43 @@ class _ClassesWidgetState extends State<ClassesWidget> {
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: myList.length,
+                itemCount: courses.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 8),
+                    padding: const EdgeInsetsDirectional.fromSTEB(15, 8, 15, 8),
                     child: GestureDetector(
-                      onTap: () => print("HH"),
+                      onTap: () {
+                        setState(() {
+                          if(!lecturePage) {
+                            setState((){
+                              got = false;
+                              toGet = 2;
+                            });
+                          lecturePage = !lecturePage;
+                          }
+
+                          else{
+                            setState((){
+                              got = false;
+                              toGet = 3;
+                            });
+                            lecturePage = !lecturePage;
+
+                          }
+
+
+                        });
+
+                      },
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: Color(0xFFF5F5F5),
+                        color: const Color(0xFFF5F5F5),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                           child: Text(
-                            myList[index],
+                            courses[index],
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 30,
                             ),
