@@ -60,4 +60,10 @@ class _NextPageState extends State<NextPage> {
   //       }),
   //     );
   // }
+
+ // Future<void> signOut() async{
+ //
+ //
+ //
+ // }
 }

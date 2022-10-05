@@ -4,15 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Attendance {
-  Attendance({this.cUnit});
-  static String? lecNo;
-  static String? course;
+  Attendance({required this.cUnit, required this.lecNo, required this.course});
+  String? lecNo;
+  String? course;
   String? cUnit;
 
   late List<String> att = <String>[];
   Future<List> getLecNo() async{
    // Map<String, dynamic> courseUnit = {"Att": Null};
    // var user = FirebaseAuth.instance.currentUser!;
+    course = course!+ DateTime.now().year.toString();
     await FirebaseFirestore.instance.collection(course!).get().then((QuerySnapshot qs) async {
         for(QueryDocumentSnapshot qds in qs.docs) {
           Map<String, dynamic> sData = qds.data() as Map<String, dynamic>;
@@ -54,7 +55,7 @@ class Attendance {
     //
     //
     // });
-
+    print("We reached");
     print(att);
     return att;
 
@@ -62,10 +63,10 @@ class Attendance {
   }
 
 
-  static void getCourse(String c, String l){
-    lecNo = l;
-    course = c;
-    course!=course!+DateTime.now().year.toString();
-  }
+  // static void getCourse(String c, String l){
+  //   lecNo = l;
+  //   course = c;
+  //   course!=course!+DateTime.now().year.toString();
+  // }
 
 }

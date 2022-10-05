@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stuatt/QRGeneration/generate.dart';
 import 'package:stuatt/class/attendance.dart';
+import 'package:stuatt/class/create.dart';
 
 
 
@@ -81,16 +82,36 @@ class _LecturerForm extends State<MyForm>{
                           child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ElevatedButton (
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder:(context) {
-                            Attendance.getCourse(courseCodeController!.text.trim.toString(), lecNoController!.text.trim().toString());
-                            StuAtt.myQRData(courseCodeController!.text.trim().toString(),
-                                courseUnitController!.text.trim().toString(),
-                                lecNoController!.text.trim().toString());
-                            return StuAtt().myQR();
-    }
+                          onPressed: () async {
+                            await Create(courseCode: courseUnitController!.text.trim(), lecNo: lecNoController!.text.trim()).registerDetails().then((value){
 
 
-                          ));},
+                              if(value == "Success"){
+                                Navigator.push(context, MaterialPageRoute(builder:(context) {
+                               // Attendance.getCourse(courseCodeController!.text.trim.toString(), lecNoController!.text.trim().toString());
+                                StuAtt.myQRData(courseCodeController!.text.trim().toString(),
+                                    courseUnitController!.text.trim().toString(),
+                                    lecNoController!.text.trim().toString());
+                                return StuAtt().myQR();
+                              }
+                                ));}
+
+
+                              else{
+
+                                var snackBar = SnackBar( content: Text(value!));
+
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                                    }
+
+
+
+
+
+                            });
+
+                            },
                           child: const Text("Submit",
                               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
                         ),
