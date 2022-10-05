@@ -24,15 +24,18 @@ class _NextPageState extends State<NextPage> {
     }
     else{
       if(user.email!.contains("outlook")){
-        FirebaseAuth.instance.signOut();
-        setState((){});
+        signOut().then((value) =>  setState(() {
+        }));
+
+
         return const GeneratePage();
 
       }
 
       else{
-        FirebaseAuth.instance.signOut();
-        setState((){});
+        signOut().then((value) =>  setState(() {
+        }));
+
         return const ScanQR();
       }
 
@@ -40,7 +43,8 @@ class _NextPageState extends State<NextPage> {
 
 
   }
-  //     return StreamBuilder<User?>(
+
+//     return StreamBuilder<User?>(
   //       stream: FirebaseAuth.instance.authStateChanges(),
   //       builder: ((context, snapshot) {
   //
@@ -61,9 +65,8 @@ class _NextPageState extends State<NextPage> {
   //     );
   // }
 
- // Future<void> signOut() async{
- //
- //
- //
- // }
+ Future<void> signOut() async{
+   await FirebaseAuth.instance.signOut();
+
+ }
 }
