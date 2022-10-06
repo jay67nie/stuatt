@@ -48,7 +48,7 @@ class _ScanQRState extends State<ScanQR> {
     );
   }
 
-  _scan() async {
+ Future<void> _scan() async {
     final result = await BarcodeScanner.scan(
       options: ScanOptions(
         strings: {
