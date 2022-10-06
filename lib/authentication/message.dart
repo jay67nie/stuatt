@@ -1,15 +1,57 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stuatt/QRGeneration/before_page.dart';
+import 'package:stuatt/QRScan/ScanQR.dart';
+import 'register.dart';
+import 'register_lecturer.dart';
+
 
 class VerificationMessageWidget extends StatefulWidget {
   const VerificationMessageWidget({Key? key}) : super(key: key);
 
   @override
-  _VerificationMessageWidgetState createState() =>
+  State<VerificationMessageWidget> createState() =>
       _VerificationMessageWidgetState();
 }
 
 class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late Timer timer;
+
+  @override
+  void initState() {
+    User user = FirebaseAuth.instance.currentUser!;
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      user.reload();
+      if (user.emailVerified){ timer.cancel();
+      Navigator.pushReplacement(context,  MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            print("Finally");
+            if(user.email!.contains("outlook")){
+
+              return const RegisterLecturer();
+            }
+            else{
+              return const RegisterStudent();
+            }
+
+          }),);
+      
+    }});
+
+
+
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +65,13 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 100),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 100, 0, 100),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                      padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                       child: Material(
                         color: Colors.transparent,
                         elevation: 10,
@@ -41,7 +83,7 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
                           height: 250,
                           decoration: BoxDecoration(
                             color: Colors.cyan,
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 blurRadius: 8,
                                 color: Color(0x33000000),
@@ -50,7 +92,7 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Align(
+                          child: const Align(
                             alignment: AlignmentDirectional(0, 0),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -61,7 +103,7 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
-                                  height: 5,
+                                  height: 2,
                                 ),
                               ),
                             ),
@@ -78,4 +120,5 @@ class _VerificationMessageWidgetState extends State<VerificationMessageWidget> {
       ),
     );
   }
+
 }

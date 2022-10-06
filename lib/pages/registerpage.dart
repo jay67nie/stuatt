@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stuatt/authentication/message.dart';
+import 'package:stuatt/authentication/register.dart';
+import 'package:stuatt/authentication/register_lecturer.dart';
+
+import '../authentication/sign_up.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -10,19 +14,20 @@ class RegisterPage extends StatefulWidget {
 
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
+final _rePasswordController = TextEditingController();
 
-Future SignUp() async {
-  await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: _emailController.text.trim(),
-    password: _passwordController.text.trim(),
-  );
-}
+//Future SignUp() async {
+ // await FirebaseAuth.instance.createUserWithEmailAndPassword(
+   // email: _emailController.text.trim(),
+  //  password: _passwordController.text.trim(),
+//  );
+//}
 
-@override
-void dispose() {
-  _emailController.dispose();
-  _passwordController.dispose();
-}
+//@override
+//void dispose() {
+ // _emailController.dispose();
+ // _passwordController.dispose();
+//}
 
 class _RegisterPageState extends State<RegisterPage> {
   @override
@@ -40,21 +45,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 150,
               ),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
-            Text(
+            const Text(
               'STUATT',
               style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
-            Text('Hello There!'),
-            SizedBox(
+            const Text('Hello There!'),
+            const SizedBox(
               height: 15.0,
             ),
             Padding(
@@ -65,15 +70,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: 'Email'),
                     ),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Padding(
@@ -84,40 +89,105 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _passwordController,
-                      obscureText: false,
-                      decoration: InputDecoration(
+                      obscureText: true,
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: 'Password'),
                     ),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
+              height: 12.0,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: TextField(
+                      controller: _rePasswordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none, hintText: 'Re-enter password'),
+                    ),
+                  ),
+                )),
+            const SizedBox(
               height: 12,
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: ElevatedButton(
-                  onPressed: SignUp,
-                  child: Text(
+                  onPressed:() async {
+                    if(_passwordController.text.trim() == _rePasswordController.text.trim()){
+
+                    SignUp(
+                    email: _emailController.text.trim(), 
+                    password: _passwordController.text.trim())
+                    .signUp().then((value) {
+                      if (value == 'Success'){
+                        if(_emailController.text.trim().contains("gmail")){
+
+                          Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                              builder: (BuildContext  context){
+                                return const RegisterStudent();
+                              }
+                          ),
+
+                          );
+                        }
+                        else{
+                          Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                              builder: (BuildContext  context){
+                                return const RegisterLecturer();
+                              }
+                          ),
+
+                          );
+                        }
+                        }
+
+                      else{
+                        final snackBar = SnackBar(content: Text(value!));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
+
+                      }
+
+
+                      });}
+                    else{
+                      const snackBar = SnackBar(content: Text("The passwords don't match"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                    }
+                 },
+                  child: const Text(
                     'Sign Up',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 15.0),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('You\'re now a member!'),
+                const Text('Already a member?'),
                 GestureDetector(
                   onTap: widget.showLoginPage,
-                  child: Text(
+                  child: const Text(
                     '  Login Here',
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),

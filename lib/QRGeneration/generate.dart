@@ -1,44 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:stuatt/QRScan/ScanQR.dart';
+import 'package:stuatt/class/classes.dart';
+import 'QR.dart';
 
 class StuAtt {
-  Scaffold myQR() {
-    return Scaffold(
-          appBar: AppBar(
-              title: const Text('StuAtt')
-          ),
-          body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: QrImage(
-                                  data: 'CSC2022 CSC1202 1',
-                                  version: QrVersions.auto,
-                                  size: (200),
-                                  gapless: false,
-                                  errorStateBuilder: (cxt, err) {
-                                    return Container(
-                                      child: const Center(
-                                        child: Text(
-                                          'Something Went Wrong',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                              ),
-                            )
-                          ]
-                      )
-                  ),
-                ]
-            ),
-          ),
-        );
+
+ static String? courseCode;
+
+  static String? courseUnit;
+
+  static String? lecNo;
+
+  static String? code;
+
+  static String? myQRData(String cC, String cU, String lN) {
+    courseCode = cC+DateTime.now().year.toString();
+    courseUnit = cU;
+    lecNo = lN;
+    code = "$courseCode $courseUnit $lecNo";
+    return code;
+  }
+
+  Widget myQR(){
+    return const QR();
+
   }
 }

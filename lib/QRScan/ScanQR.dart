@@ -1,6 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:stuatt/class/classes.dart';
+import 'package:stuatt/user-info/submit.dart';
 
 class ScanQR extends StatefulWidget {
   const ScanQR({super.key});
@@ -10,6 +11,11 @@ class ScanQR extends StatefulWidget {
 }
 
 class _ScanQRState extends State<ScanQR> {
+  int currentPage = 0;
+  List<Widget> pages = const [
+    ScanQR(),
+    ClassesWidget(),
+  ];
   ScanResult? scanResult;
 
   final _flashOnController = TextEditingController(text: 'Flash on');
@@ -18,11 +24,8 @@ class _ScanQRState extends State<ScanQR> {
 
   @override
   Widget build(BuildContext context) {
-    final ScanResult = this.scanResult;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: const Text('QR Code Scanner'),
           ),
@@ -34,7 +37,7 @@ class _ScanQRState extends State<ScanQR> {
                 onPressed: _scan,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const [
                     Icon(Icons.camera, size: 24.0),
                     Text('Click Me!'),
                     SizedBox(
@@ -44,8 +47,8 @@ class _ScanQRState extends State<ScanQR> {
                 ),
               )
             ],
-          )),
-    );
+          ));
+
   }
 
  Future<void> _scan() async {
@@ -58,6 +61,28 @@ class _ScanQRState extends State<ScanQR> {
         },
       ),
     );
-    setState(() => scanResult = result);
+
+
+      scanResult = result;
+      print(scanResult);
+      print(scanResult!.rawContent);
+
+      List<String> codes = <String>[];
+      codes = scanResult!.rawContent.split(" ");
+
+      await Submit(course: codes[0], courseUnit: codes[1], lecNo: codes[2]).submit().then((value){
+
+        var snackBar = SnackBar(
+          content: Text(value!),);
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      });
+
+
+
+
+
+
   }
 }

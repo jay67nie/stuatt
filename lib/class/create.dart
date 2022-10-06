@@ -13,7 +13,7 @@ class Create{
 
     var names = <String, dynamic>{
       "CUnits": {
-        courseCode: [int.parse(lecNo)]
+        courseCode: FieldValue.arrayUnion([int.parse(lecNo)])
       }
 
     };
@@ -26,7 +26,7 @@ class Create{
     }
 
     catch (e) {
-      return "Failure";
+      return e.toString();
     }
 
   }
