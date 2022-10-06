@@ -1,23 +1,30 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
 
-Future SignIn() async {
-  await FirebaseAuth.instance.signInWithEmailAndPassword(
+Future SignUp() async {
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: _emailController.text.trim(),
     password: _passwordController.text.trim(),
   );
 }
 
-class _LoginPageState extends State<LoginPage> {
+@override
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +50,10 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Text('Hello There!'),
             SizedBox(
               height: 15.0,
             ),
@@ -76,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.only(left: 15.0),
                     child: TextField(
                       controller: _passwordController,
-                      obscureText: true,
+                      obscureText: false,
                       decoration: InputDecoration(
                           border: InputBorder.none, hintText: 'Password'),
                     ),
@@ -86,39 +97,31 @@ class _LoginPageState extends State<LoginPage> {
               height: 12,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GestureDetector(
-                onTap: SignIn,
-                child: Container(
-                  padding: const EdgeInsets.all(13.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: ElevatedButton(
+                  onPressed: SignUp,
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0),
                   ),
-                  child: Center(
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                )),
             SizedBox(
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account?'),
-                Text(
-                  ' Register Here',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                Text('You\'re now a member!'),
+                GestureDetector(
+                  onTap: widget.showLoginPage,
+                  child: Text(
+                    '  Login Here',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             )
