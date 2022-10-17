@@ -24,34 +24,45 @@ class _ScanQRState extends State<ScanQR> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-          appBar: AppBar(
-            title: const Text('QR Code Scanner'),
+      appBar: AppBar(
+        title: const Text('QR Code Scanner'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+            onPressed: _scan,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.camera, size: 24.0),
+                Text('Click Me!'),
+                SizedBox(
+                  width: 5,
+                )
+              ],
+            ),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ElevatedButton(
-                onPressed: _scan,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.camera, size: 24.0),
-                    Text('Click Me!'),
-                    SizedBox(
-                      width: 5,
-                    )
-                  ],
-                ),
-              )
-            ],
-          ));
-
+        ],
+      ),
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.camera), label: 'Scan QR'),
+          NavigationDestination(icon: Icon(Icons.book), label: 'Quizzes'),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        selectedIndex: currentPage,
+      ),
+    );
   }
 
- Future<void> _scan() async {
+  Future<void> _scan() async {
     final result = await BarcodeScanner.scan(
       options: ScanOptions(
         strings: {
@@ -62,27 +73,21 @@ class _ScanQRState extends State<ScanQR> {
       ),
     );
 
+    scanResult = result;
+    print(scanResult);
+    print(scanResult!.rawContent);
 
-      scanResult = result;
-      print(scanResult);
-      print(scanResult!.rawContent);
+    List<String> codes = <String>[];
+    codes = scanResult!.rawContent.split(" ");
 
-      List<String> codes = <String>[];
-      codes = scanResult!.rawContent.split(" ");
+    await Submit(course: codes[0], courseUnit: codes[1], lecNo: codes[2])
+        .submit()
+        .then((value) {
+      var snackBar = SnackBar(
+        content: Text(value!),
+      );
 
-      await Submit(course: codes[0], courseUnit: codes[1], lecNo: codes[2]).submit().then((value){
-
-        var snackBar = SnackBar(
-          content: Text(value!),);
-
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-      });
-
-
-
-
-
-
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 }

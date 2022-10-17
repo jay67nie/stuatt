@@ -10,11 +10,9 @@ import 'pages/loginpage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
   await Firebase.initializeApp();
 
-  runApp(MyApp());
-
+  runApp(const MyApp());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -24,33 +22,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.lightBlue,
-          fontFamily: 'Product Sans',
-
-          textTheme: const TextTheme(
-            bodyText1: TextStyle(fontFamily: 'Roboto',
-            color: Colors.black
-            ),
-            headline1: TextStyle(color: Colors.black,
-            fontSize: 30.0
-            ),
-
-
-
-          )
-
-
-        ),
+            brightness: Brightness.light,
+            primaryColor: Colors.lightBlue,
+            fontFamily: 'Product Sans',
+            textTheme: const TextTheme(
+              bodyText1: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+              headline1: TextStyle(color: Colors.black, fontSize: 30.0),
+            )),
         home: const NextPage());
   }
 }
