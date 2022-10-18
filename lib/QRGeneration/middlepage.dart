@@ -72,6 +72,13 @@ class _LecturerForm extends State<MyForm>{
               labelText: 'Lecture Number',
             ),
           ),
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.abc_outlined),
+              hintText: 'Enter the url',
+              labelText: 'URL',
+            ),
+          ),
           Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
