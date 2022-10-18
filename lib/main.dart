@@ -4,6 +4,7 @@ import 'package:stuatt/firebase_options.dart';
 import 'package:stuatt/authentication/next_page.dart';
 import 'package:stuatt/pages/auth_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'Form.dart';
 
 import 'pages/loginpage.dart';
 
